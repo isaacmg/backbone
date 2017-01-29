@@ -12,10 +12,10 @@ args = {
 d = datetime(2017, 1, 17, 3, 15,00)
 
 
-dag = DAG('usgs', start_date = d, schedule_interval = '16 * * * *', default_args = args)
+dag = DAG('kafka_run', start_date = d, schedule_interval = '@hourly', default_args = args)
 
 t_main = BashOperator(
-  task_id = 'usgs_fetch'
+  task_id = 'kafka'
   , dag = dag
   , bash_command = 'java -cp /mnt/c/Users/img/Documents/GitHub/backbone/target/kafkaUSGS-1.0-SNAPSHOT.jar KafkaUSGS'
   #params = {'class': 'FetchJSON', 'path': 'jars/kafkaUSGS.jar'}
